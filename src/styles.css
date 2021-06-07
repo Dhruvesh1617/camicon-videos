@@ -1,0 +1,81 @@
+@import url("https://dhruvesh-component-library.netlify.app/style.css");
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.icon-Buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.img-fit {
+  width: 100%;
+}
+
+.home-video-container {
+  width: 25rem;
+  height: 18rem;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamburger {
+  height: 64px;
+  width: 64px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+}
+
+.icons-close {
+  height: 64px;
+  width: 75px;
+}
+
+.close {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.sidebar {
+  background-color: #ffffff;
+  width: 200px;
+  height: 100vh;
+
+  position: fixed;
+  top: 0px;
+  left: 0px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.Items {
+  font-size: x-large;
+}
+
+.Items:hover {
+  background-color: gray;
+  color: white;
+}
+.close {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
