@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 const Sidebar = ({ setShowSideBar, showSideBar }) => {
   return (
-    <div>
+    <div className="sidebar">
       <div className="close">
         <img
           onClick={() => setShowSideBar(!showSideBar)}
@@ -11,10 +11,10 @@ const Sidebar = ({ setShowSideBar, showSideBar }) => {
           alt="close"
         />
       </div>
-      <div className="Items"><Link to="/liked">Liked</Link></div>
-      <div className="Items"><Link to="/saved">Saved</Link></div>
-      <div className="Items"><Link to="/history">History</Link></div>
-      <div className="Items"><Link to="/playlist-videos">Playlist</Link></div>
+      <div className="Items"><Link style={{ textDecoration: "none"}} to="/liked">Liked</Link></div>
+      <div className="Items"><Link style={{ textDecoration: "none"}} to="/saved">Saved</Link></div>
+      <div className="Items"><Link style={{ textDecoration: "none"}}  to="/history">History</Link></div>
+      <div className="Items"><Link style={{ textDecoration: "none"}} to="/playlist-videos">Playlist</Link></div>
     </div>
   );
 };
