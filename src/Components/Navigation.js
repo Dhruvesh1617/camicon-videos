@@ -11,6 +11,7 @@ const Sidebar = ({ setShowSideBar, showSideBar }) => {
           alt="close"
         />
       </div>
+      <div className="Items"><Link style={{ textDecoration: "none"}} to="/">Home</Link></div>
       <div className="Items"><Link style={{ textDecoration: "none"}} to="/liked">Liked</Link></div>
       <div className="Items"><Link style={{ textDecoration: "none"}} to="/saved">Saved</Link></div>
       <div className="Items"><Link style={{ textDecoration: "none"}}  to="/history">History</Link></div>

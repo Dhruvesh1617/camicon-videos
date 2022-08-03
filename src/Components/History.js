@@ -5,13 +5,15 @@ export const History = () => {
   console.log(history);
   return (
     <div>
-      {history.map(({ id, imageURL, name, duration }) => (
+      <h1  style={{textAlign:"center"}}>History</h1>
+      {history.map(({ _id, imgUrl, name, duration }) => (
         <div className="main-container ">
-          <div key={id} className="Card mid-width-card home-video-container">
-            <Link to={`/${id}`}>
-              <img src={imageURL} alt="history" />
+          <div key={_id} className="Card mid-width-card home-video-container">
+            <Link to={`/${_id}`}>
+              <img   style={{ height: "30vh", width: "100%" }} src={imgUrl} alt="history" />
               <div>{name}</div>
-              <span>{duration}</span>
+              <span   style={{  backgroundColor: "black",
+                color: "white",position: "absolute", bottom: "115px", right: "60px" }}>{duration}</span>
             </Link>
           </div>
         </div>

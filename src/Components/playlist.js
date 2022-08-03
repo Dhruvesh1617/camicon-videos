@@ -6,27 +6,36 @@ export const PlayList = () => {
   console.log(playlist);
   return (
     <>
-    Playlist
-      {playlist.map(({ id, name, videos }) => (
-        <div key={id}>
+    <h1 style={{textAlign:"center"}}>Playlist</h1>
+      {playlist.map(({_id, name, videos }) => (
+        <div key={_id}  className="main-container">
           <h2>{name}</h2>
           <div>
             {videos.map(
-              ({ id, name, imageURL, videoURL, duration, details }) => (
+              ({_id, name, imgUrl, videoUrl, duration, details }) => (
                 <Link
-                  to={`/playlist-videos/${id}`}
+                  to={`/playlist-videos/${_id}`}
                   onClick={() =>
                     dataDispatch({
                       type: ADD_TO_HISTORY,
-                      video: { id, name, imageURL, videoURL, duration, details }
+                      video: {_id, name, imgUrl, videoUrl, duration, details }
                     })
                   }
                 >
-                  <div>
-                    <img src={imageURL} alt={name} />
-                    <span>{duration}</span>
-                    <p>{name}</p>
-                  </div>
+               <div className="main-container">
+          <div key={_id} className="Card mid-width-card home-video-container">
+            <Link to={`/${_id}`}>
+              <img src={imgUrl}  style={{ height: "30vh", width: "100%" }} alt="liked-video" />
+              <h2>{name}</h2>
+              <span
+                style={{  backgroundColor: "black",
+                color: "white",position: "absolute", bottom: "115px", right: "60px" }}
+              >
+              {duration}
+              </span>
+            </Link>
+          </div>
+        </div>
                 </Link>
               )
             )}

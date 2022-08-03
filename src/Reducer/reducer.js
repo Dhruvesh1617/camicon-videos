@@ -7,11 +7,42 @@ export const NOT_LIKED_VIDEO = "NOT_LIKED_VIDEO";
 export const ADD_TO_PLAYLIST = "ADD_TO_PLAYLIST";
 export const REMOVE_FROM_PLAYLIST = "REMOVE_FROM_PLAYLIST";
 export const ADD_PLAYLIST = "ADD_PLAYLIST";
+export const SET_VIDEOS="SET_VIDEOS";
+export const REGISTER_USER="REGISTER_USER";
+
+export const datalist = {
+  user:{},
+  isAuthenticated:false,
+  videosData:[],
+  history: [],
+  currentvideo: [],
+  savedvideo: [],
+  likedvideo: [],
+  playlist: [
+    {
+      id: "default",
+      name: "default",
+      videos: []
+    }
+  ]
+};
+
 export const reducerfunction = (
   state,
-  { type, video, Currentvideo, playlistName, id }
+  { type, payload,video, Currentvideo, playlistName,_id }
 ) => {
   switch (type) {
+
+    case SET_VIDEOS:
+        return {...state,videosData:payload}
+
+    case REGISTER_USER:
+        localStorage.setItem("token",payload.token)
+        localStorage.setItem("isAuthenticated",true)
+        return {...state,
+              user:payload?.user,
+              isAuthenticated:true,
+            }
     case ADD_TO_HISTORY:
       return {
         ...state,
@@ -23,20 +54,20 @@ export const reducerfunction = (
     case UNSAVED_VIDEO:
       return {
         ...state,
-        savedvideo: state.savedvideo.filter((video) => video.id !== id)
+        savedvideo: state.savedvideo.filter((video) => video._id !==_id)
       };
     case LIKED_VIDEO:
       return { ...state, likedvideo: state.likedvideo.concat(video) };
     case NOT_LIKED_VIDEO:
       return {
         ...state,
-        likedvideo: state.likedvideo.filter((video) => video.id !== id)
+        likedvideo: state.likedvideo.filter((video) => video._id !==_id)
       };
     case ADD_PLAYLIST:
       return {
         ...state,
         playlist: state.playlist.concat({
-          id: v4(),
+         _id: v4(),
           name: playlistName,
           videos: []
         })
@@ -45,8 +76,8 @@ export const reducerfunction = (
       return {
         ...state,
         playlist: state.playlist.map((item) =>
-          item.id === id
-            ? { ...item, videos: [...item.videos, Currentvideo] }
+          item._id ===_id
+            ? { ...item, videos:item.videos.concat(Currentvideo) }
             : item
         )
       };
@@ -54,10 +85,10 @@ export const reducerfunction = (
       return {
         ...state,
         playlist: state.playlist.map((item) =>
-          item.id === id
+          item._id ===_id
             ? {
                 ...item,
-                videos: item.videos.filter((vid) => vid.id !== Currentvideo.id)
+                videos: item.videos.filter((vid) => vid._id !== Currentvideo._id)
               }
             : item
         )

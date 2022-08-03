@@ -1,5 +1,5 @@
 import { useData } from "../Context/DataContext";
-import { Link } from "react-router-dom";
+
 import { AddToPlaylist } from "./AddtoPlaylist";
 import {
   SAVE_VIDEO,
@@ -8,8 +8,8 @@ import {
   NOT_LIKED_VIDEO
 } from "../Reducer/reducer";
 import { useState } from "react";
-export function checkItem(array, id) {
-  return array.find((item) => item.id === id);
+export function checkItem(array,_id) {
+  return array.find((item) => item._id ===_id);
 }
 
 export const VideoDetails = () => {
@@ -19,12 +19,12 @@ export const VideoDetails = () => {
   console.log(currentVideo.name);
 
   return (
-    <div>
-      <div>
+    <div className="video_Details_section mrgn-t">
+      <div style={{"display":"flex","flexDirection":"column","justifyContent":"center","alignItems":"center","marginTop":"2rem"}}>
         <iframe
-          width="100%"
-          height="335"
-          src={currentVideo.videoURL}
+          width="80%"
+          height="250"
+          src={currentVideo.videoUrl}
           title="YouTube video player"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -34,16 +34,17 @@ export const VideoDetails = () => {
         <div className="icon-Buttons">
           <svg
             style={{
-              height: "64px",
-              width: "64px",
+              height: "34px",
+              width: "34px",
+              margin:"2rem",
               fill: `${
-                checkItem(likedvideo, currentVideo.id) ? "black" : "grey"
+                checkItem(likedvideo, currentVideo._id) ? "#1a83ff" : "black"
               }`
             }}
             onClick={() => {
-              !checkItem(likedvideo, currentVideo.id)
+              !checkItem(likedvideo, currentVideo._id)
                 ? dataDispatch({ type: LIKED_VIDEO, video: currentVideo })
-                : dataDispatch({ type: NOT_LIKED_VIDEO, id: currentVideo.id });
+                : dataDispatch({ type: NOT_LIKED_VIDEO,_id: currentVideo._id });
             }}
             viewBox="0 0 24 24"
             preserveAspectRatio="xMidYMid meet"
@@ -58,16 +59,17 @@ export const VideoDetails = () => {
           </svg>
           <svg
             style={{
-              height: "64px",
-              width: "64px",
+              height: "34px",
+              width: "34px",
+              margin:"2rem",
               fill: `${
-                checkItem(savedvideo, currentVideo.id) ? "black" : "gray"
+                checkItem(savedvideo, currentVideo._id) ? "#1a83ff" : "black"
               }`
             }}
             onClick={() => {
-              !checkItem(savedvideo, currentVideo.id)
+              !checkItem(savedvideo, currentVideo._id)
                 ? dataDispatch({ type: SAVE_VIDEO, video: currentVideo })
-                : dataDispatch({ type: UNSAVED_VIDEO, id: currentVideo.id });
+                : dataDispatch({ type: UNSAVED_VIDEO,_id: currentVideo._id });
             }}
             aria-label="Remove"
             class="_8-yf5 "
@@ -78,7 +80,7 @@ export const VideoDetails = () => {
             <path d="M43.5 48c-.4 0-.8-.2-1.1-.4L24 28.9 5.6 47.6c-.4.4-1.1.6-1.6.3-.6-.2-1-.8-1-1.4v-45C3 .7 3.7 0 4.5 0h39c.8 0 1.5.7 1.5 1.5v45c0 .6-.4 1.2-.9 1.4-.2.1-.4.1-.6.1z"></path>
           </svg>
           <svg
-            style={{ height: "64px", width: "64px", fill: "gray" }}
+            style={{ height: "34px", width: "34px", margin:"2rem", fill: "black" }}
             onClick={() => setShow(!show)}
             viewBox="0 0 24 24"
             preserveAspectRatio="xMidYMid meet"
@@ -93,6 +95,7 @@ export const VideoDetails = () => {
             </g>
           </svg>
         </div>
+        <div style={{"maxWidth":"600px"}}>{currentVideo.details}</div>
       </div>
       {show && <AddToPlaylist show={show} setShow={setShow} />}
     </div>

@@ -1,37 +1,53 @@
 import { VideoDB } from "../DB/videoDB";
+import { useEffect } from "react";
+import { useVideoDB } from "../DB/videoDB";
 import { Link } from "react-router-dom";
 import { useData } from "../Context/DataContext";
 import { ADD_TO_HISTORY } from "../Reducer/reducer";
 export const Home = () => {
-  const { dataDispatch } = useData();
+  const { videosData, dataDispatch ,loadVideos} = useData();
+ console.log("Array of videos",videosData)
   return (
     <div>
-      <h1>Home</h1>
-
-      {VideoDB.map((videoitem) => (
-        <div className="main-container">
-          <div
-            className="Card mid-width-card home-video-container"
-            key={videoitem.id}
-          >
-            <Link
-              onClick={() =>
-                dataDispatch({ type: ADD_TO_HISTORY, video: videoitem })
-              }
-              style={{ textDecoration: "none", color: "black" }}
-              to={`/${videoitem.id}`}
+      <h1 style={{"textAlign":"center"}}>CamTube</h1>
+      {videosData ? (
+        videosData.map((videoitem) => (
+          <div className="main-container">
+            <div
+              className="card mid_width_card home-video-container"
+              key={videoitem._id}
             >
-              <img src={videoitem.imageURL} alt="videoitem.name" />
-              <h3>{videoitem.name}</h3>
-              <span
-                style={{ position: "absolute", bottom: "115px", right: "60px" }}
+              <Link
+                onClick={() =>
+                  dataDispatch({ type: ADD_TO_HISTORY, video: videoitem })
+                }
+                style={{ textDecoration: "none", color: "black" }}
+                to={`/${videoitem._id}`}
               >
-                Time:{videoitem.duration}
-              </span>
-            </Link>
+                <img
+                  style={{height:"30vh", width: "100%"}}
+                  src={videoitem.imgUrl}
+                  alt="videoitem.name"
+                />
+                <h3>{videoitem.name}</h3>
+                <span
+                  style={{
+                    backgroundColor: "black",
+                    color: "white",
+                    position: "absolute",
+                    bottom: "50px",
+                    right: "30px"
+                  }}
+                >
+                  Time:{videoitem.duration}
+                </span>
+              </Link>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <div style={{textAlign:"center"}}>Loading...</div>
+      )}
     </div>
   );
 };

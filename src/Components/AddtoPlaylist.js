@@ -41,23 +41,23 @@ export const AddToPlaylist = ({ show, setShow }) => {
           {playList.map((item) => (
             <label>
               <input
-                key={item.id}
+                key={item._id}
                 type="checkbox"
                 onClick={() => {
-                  !checkItem(item.videos, currentvideo.id)
+                  !checkItem(item.videos, currentvideo._id)
                     ? dataDispatch({
                         type: ADD_TO_PLAYLIST,
                         Currentvideo: currentvideo,
-                        id: item.id
+                        _id: item._id
                       })
                     : dataDispatch({
                         type: REMOVE_FROM_PLAYLIST,
                         Currentvideo: currentvideo,
-                        id: item.id
+                        _id: item._id
                       });
                 }}
-                id={item.id}
-                checked={checkItem(item.videos, currentvideo.id)}
+                id={item._id}
+                checked={checkItem(item.videos, currentvideo._id)}
               />
               {item.name}
             </label>

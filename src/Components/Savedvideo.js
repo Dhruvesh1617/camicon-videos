@@ -6,17 +6,18 @@ export const SavedVideo = () => {
   console.log(savedvideo);
   return (
     <div>
-      Saved-Videos
-      {savedvideo.map(({ id, imageURL, name, duration }) => (
+      <h1 style={{textAlign:"center"}}>Saved-Videos</h1>
+      {savedvideo.map(({ _id, imgUrl, name, duration }) => (
         <div className="main-container">
-          <div key={id} className="Card mid-width-card home-video-container">
-            <Link to={`/${id}`}>
-              <img src={imageURL} alt="saved-video" />
+          <div key={_id} className="Card mid-width-card home-video-container">
+            <Link to={`/${_id}`}>
+              <img style={{ height: "30vh", width: "100%" }} src={imgUrl} alt="saved-video" />
               <div>{name}</div>
               <span
-                style={{ position: "absolute", bottom: "115px", right: "60px" }}
+                style={{ backgroundColor: "black",
+                color: "white", position: "absolute", bottom: "115px", right: "60px" }}
               >
-                {duration}
+              {duration}
               </span>
             </Link>
           </div>
