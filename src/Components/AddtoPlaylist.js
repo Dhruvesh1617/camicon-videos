@@ -1,5 +1,5 @@
 import { useData } from "../Context/DataContext";
-import { checkItem } from "./VideoDetails";
+import { checkItem } from "../utils/checkItem"
 import { useState } from "react";
 import { ADD_TO_PLAYLIST, REMOVE_FROM_PLAYLIST, ADD_PLAYLIST } from "../Reducer/reducer";
 

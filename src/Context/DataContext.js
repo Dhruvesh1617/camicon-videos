@@ -1,14 +1,14 @@
 import axios from "axios";
 import { createContext, useContext, useReducer } from "react";
 import { reducerfunction } from "../Reducer/reducer";
-import { datalist,REGISTER_USER,SET_VIDEOS} from "../Reducer/reducer";
+import { datalist,REGISTER_USER,SET_VIDEOS,LOGIN_USER,LOGOUT_USER} from "../Reducer/reducer";
 const DataContext = createContext();
 
 
 
 export const DataProvider = ({ children }) => {
   const [
-    { videosData,history, currentvideo, savedvideo, playlist, likedvideo },
+    { videosData,history, currentvideo, savedvideos, playlist, likedvideos,isAuthenticated },
     dispatch
   ] = useReducer(reducerfunction, datalist);
 
@@ -41,17 +41,40 @@ export const DataProvider = ({ children }) => {
 
   }
 
+  const loginUser=async (email,password,state,navigate)=>
+  {
+    try{
+
+      const {data}=await axios.post("https://camtubetest.herokuapp.com/users/login",{email,password})
+      dispatch({type:LOGIN_USER,payload:data})
+      navigate(state?.from?state.from:"/")
+      
+      console.log("state login",state.from)
+    }
+    catch(err)
+    {
+      console.log(err)
+    }
+  }
+  const logOutUser=()=>
+  {
+    dispatch({type:LOGOUT_USER})
+  }
+
   return (
     <DataContext.Provider
       value={{
+        loginUser,
+        logOutUser,
         loadVideos,
         registerUser,
         videosData,
+        isAuthenticated,
         history,
         currentvideo,
         playlist,
-        savedvideo,
-        likedvideo,
+        savedvideos,
+        likedvideos,
         dataDispatch: dispatch
       }}
     >

@@ -5,6 +5,12 @@
  
 }
 
+.logOut
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .active {
   visibility: visible;
   opacity: 1;
@@ -80,10 +86,11 @@
   align-items: center;
 }
 
-.main-container{
-display:inline-flex;
-margin-left:13rem;
 
+.main-container
+{
+  display:inline-flex;
+  margin-left:12rem;
 }
 
 .hamburger {

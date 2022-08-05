@@ -1,5 +1,5 @@
 import { useData } from "../Context/DataContext";
-
+import { checkItem } from "../utils/checkItem";
 import { AddToPlaylist } from "./AddtoPlaylist";
 import {
   SAVE_VIDEO,
@@ -8,13 +8,11 @@ import {
   NOT_LIKED_VIDEO
 } from "../Reducer/reducer";
 import { useState } from "react";
-export function checkItem(array,_id) {
-  return array.find((item) => item._id ===_id);
-}
+
 
 export const VideoDetails = () => {
   const [show, setShow] = useState(false);
-  const { currentvideo, savedvideo, dataDispatch, likedvideo } = useData();
+  const { currentvideo, savedvideos, dataDispatch, likedvideos} = useData();
   const currentVideo = currentvideo;
   console.log(currentVideo.name);
 
@@ -38,11 +36,11 @@ export const VideoDetails = () => {
               width: "34px",
               margin:"2rem",
               fill: `${
-                checkItem(likedvideo, currentVideo._id) ? "#1a83ff" : "black"
+                checkItem(likedvideos, currentVideo._id) ? "#1a83ff" : "black"
               }`
             }}
             onClick={() => {
-              !checkItem(likedvideo, currentVideo._id)
+              !checkItem(likedvideos, currentVideo._id)
                 ? dataDispatch({ type: LIKED_VIDEO, video: currentVideo })
                 : dataDispatch({ type: NOT_LIKED_VIDEO,_id: currentVideo._id });
             }}
@@ -63,11 +61,11 @@ export const VideoDetails = () => {
               width: "34px",
               margin:"2rem",
               fill: `${
-                checkItem(savedvideo, currentVideo._id) ? "#1a83ff" : "black"
+                checkItem(savedvideos, currentVideo._id) ? "#1a83ff" : "black"
               }`
             }}
             onClick={() => {
-              !checkItem(savedvideo, currentVideo._id)
+              !checkItem(savedvideos, currentVideo._id)
                 ? dataDispatch({ type: SAVE_VIDEO, video: currentVideo })
                 : dataDispatch({ type: UNSAVED_VIDEO,_id: currentVideo._id });
             }}

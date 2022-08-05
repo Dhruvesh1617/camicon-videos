@@ -13,6 +13,7 @@ import {PlayList} from "./Components/playlist";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
 import { useData } from "./Context/DataContext";
+import { PrivateRoute} from "./Components/privateRoute/PrivateRoute"
 import {useEffect} from "react"
 function App() {
   const {loadVideos}=useData();
@@ -33,15 +34,15 @@ function App() {
     <div className="App">
      <Navbar/>
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/:videoID" element={<VideoDetails />} />
-        <Route path="/saved" element={<SavedVideo />} />
-        <Route path="/history" element={<History />} />
-        <Route path="/liked" element={<LikedVideo />} />
-        <Route path="/playlist-videos" element={<PlayList/>}/>
-        <Route path="/playlist-videos/:videoID" element={<VideoDetails/>}/>
-        <Route path="/users/login" element={<Login/>}/>
-        <Route path="/users/register" element={<Register/>}/>
+        <Route  path="/" element={<Home />} />
+        <PrivateRoute  path="/:videoID" element={<VideoDetails />} />
+        <PrivateRoute path="/saved" element={<SavedVideo />} />
+        <PrivateRoute path="/history" element={<History />} />
+        <PrivateRoute path="/liked" element={<LikedVideo />} />
+        <PrivateRoute path="/playlist-videos" element={<PlayList/>}/>
+        <PrivateRoute path="/playlist-videos/:videoID" element={<VideoDetails/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/register" element={<Register/>}/>
       </Routes>
     </div>
   );

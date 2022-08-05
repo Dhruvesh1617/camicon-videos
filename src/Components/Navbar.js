@@ -15,7 +15,7 @@ function Navbar() {
             <Link to="#" className="menu-bars">
                 <FaIcons.FaBars onClick={showSideBar} />
             </Link>
-           <Link to="/users/login" className='loginImg'>
+           <Link to="/login" className='loginImg'>
            <svg viewBox="0 0 24 24" width="32" height="32" stroke="white" stroke-width="2" 
            fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
             <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7">

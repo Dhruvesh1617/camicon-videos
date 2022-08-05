@@ -1,12 +1,13 @@
 import { useData } from "../Context/DataContext";
 import { Link } from "react-router-dom";
 export const LikedVideo = () => {
-  const { likedvideo } = useData();
+  const { likedvideos } = useData();
+  console.log(likedvideos)
   return (
     <div className="main-container">
     
       <h1  style={{textAlign:"center"}}>Liked videos</h1>
-      {likedvideo.map(({_id, imgUrl, name, duration }) => (
+      {likedvideos?.videoItems?.map(({_id, imgUrl, name, duration }) => (
         <div >
           <div key={_id} className="Card mid-width-card home-video-container">
             <Link to={`/${_id}`}>

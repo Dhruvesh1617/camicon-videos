@@ -6,7 +6,7 @@ export const History = () => {
   return (
     <div>
       <h1  style={{textAlign:"center"}}>History</h1>
-      {history.map(({ _id, imgUrl, name, duration }) => (
+      {history?.videoItems?.map(({ _id, imgUrl, name, duration }) => (
         <div className="main-container ">
           <div key={_id} className="Card mid-width-card home-video-container">
             <Link to={`/${_id}`}>

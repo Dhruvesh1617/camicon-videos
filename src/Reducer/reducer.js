@@ -9,6 +9,8 @@ export const REMOVE_FROM_PLAYLIST = "REMOVE_FROM_PLAYLIST";
 export const ADD_PLAYLIST = "ADD_PLAYLIST";
 export const SET_VIDEOS="SET_VIDEOS";
 export const REGISTER_USER="REGISTER_USER";
+export const LOGIN_USER="LOGIN_USER";
+export const LOGOUT_USER="LOGOUT_USER";
 
 export const datalist = {
   user:{},
@@ -16,8 +18,8 @@ export const datalist = {
   videosData:[],
   history: [],
   currentvideo: [],
-  savedvideo: [],
-  likedvideo: [],
+  savedvideos: [],
+  likedvideos: [],
   playlist: [
     {
       id: "default",
@@ -43,6 +45,37 @@ export const reducerfunction = (
               user:payload?.user,
               isAuthenticated:true,
             }
+    case LOGIN_USER:
+      localStorage.setItem("token",payload.token)
+      localStorage.setItem("isAuthenticated",true)
+      return{
+        ...state,
+        user:payload?.user,
+        isAuthenticated:true,
+        history:payload?.user?.historyVideos[0],
+        likedvideos:payload?.user?.likedVideos[0],
+        savedvideos:payload?.user?.savedVideos[0],
+        playlist:payload?.user?.playListVideos,
+      }
+    case LOGOUT_USER:
+      localStorage.setItem("isAuthenticated",false)
+      return{
+        ...state,
+        user:{},
+        isAuthenticated:false,
+        history: [],
+        currentvideo: [],
+        savedvideos: [],
+        likedvideos: [],
+        playlist: [
+          {
+            id: "default",
+            name: "default",
+            videos: []
+          }
+        ]
+
+      }
     case ADD_TO_HISTORY:
       return {
         ...state,
