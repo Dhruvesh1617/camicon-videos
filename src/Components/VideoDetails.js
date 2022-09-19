@@ -18,7 +18,7 @@ export const VideoDetails = () => {
 
   return (
     <div className="video_Details_section mrgn-t">
-      <div style={{"display":"flex","flexDirection":"column","justifyContent":"center","alignItems":"center","marginTop":"2rem"}}>
+      <div className="videoDetails_container">
         <iframe
           width="80%"
           height="250"

@@ -2,7 +2,7 @@ import { useData } from "../Context/DataContext";
 import { Link } from "react-router-dom";
 export const History = () => {
   const { history } = useData();
-  console.log(history);
+  console.log("history",history);
   return (
     <div>
       <h1  style={{textAlign:"center"}}>History</h1>

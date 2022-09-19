@@ -7,7 +7,7 @@ export const SavedVideo = () => {
   return (
     <div>
       <h1 style={{textAlign:"center"}}>Saved-Videos</h1>
-      {savedvideos.videoItems.map(({ _id, imgUrl, name, duration }) => (
+      {savedvideos?.videoItems?.map(({ _id, imgUrl, name, duration }) => (
         <div className="main-container">
           <div key={_id} className="Card mid-width-card home-video-container">
             <Link to={`/${_id}`}>

@@ -11,6 +11,7 @@ export const SET_VIDEOS="SET_VIDEOS";
 export const REGISTER_USER="REGISTER_USER";
 export const LOGIN_USER="LOGIN_USER";
 export const LOGOUT_USER="LOGOUT_USER";
+export const LOAD_USER="LOAD_USER";
 
 export const datalist = {
   user:{},
@@ -45,6 +46,17 @@ export const reducerfunction = (
               user:payload?.user,
               isAuthenticated:true,
             }
+    case LOAD_USER:
+            return{
+              ...state,
+             user:payload?.user===undefined?{}:payload.user,
+             isAuthenticated:true,
+           history:payload?.user?.historyVideos[0]?.videoItems===undefined?[]:payload?.user?.historyVideos[0],
+           likedvideos:payload?.user?.likedVideos[0]?.videoItems===undefined?[]:payload?.user?.likedVideos[0],
+          savedvideos:payload?.user?.savedVideos[0]?.videoItems===undefined?[]:payload?.user?.likedVideos[0],
+        playlist:payload?.user?.playListVideos,
+
+            }
     case LOGIN_USER:
       localStorage.setItem("token",payload.token)
       localStorage.setItem("isAuthenticated",true)
@@ -52,13 +64,14 @@ export const reducerfunction = (
         ...state,
         user:payload?.user,
         isAuthenticated:true,
-        history:payload?.user?.historyVideos[0],
-        likedvideos:payload?.user?.likedVideos[0],
-        savedvideos:payload?.user?.savedVideos[0],
+        history:payload?.user?.historyVideos[0]===undefined?[]:payload?.user?.historyVideos[0],
+        likedvideos:payload?.user?.likedVideos[0]===undefined?[]:payload?.user?.likedVideos[0],
+        savedvideos:payload?.user?.savedVideos[0]===undefined?[]:payload?.user?.likedVideos[0],
         playlist:payload?.user?.playListVideos,
       }
     case LOGOUT_USER:
-      localStorage.setItem("isAuthenticated",false)
+      localStorage.removeItem("isAuthenticated")
+      localStorage.removeItem("token")
       return{
         ...state,
         user:{},

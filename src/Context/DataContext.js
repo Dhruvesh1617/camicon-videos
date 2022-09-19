@@ -1,10 +1,24 @@
 import axios from "axios";
 import { createContext, useContext, useReducer } from "react";
 import { reducerfunction } from "../Reducer/reducer";
-import { datalist,REGISTER_USER,SET_VIDEOS,LOGIN_USER,LOGOUT_USER} from "../Reducer/reducer";
+import { datalist,REGISTER_USER,SET_VIDEOS,LOGIN_USER,LOGOUT_USER,LOAD_USER} from "../Reducer/reducer";
 const DataContext = createContext();
 
-
+export const tokenConfig=()=>
+{
+  let token=localStorage.getItem("token")
+  console.log("token",token)
+  const config = {
+		headers: {
+			"Content-type": "application/json",
+		}
+	};
+  if(token)
+  {
+    config['headers'].Authorization=`bearer ${token}`
+  }
+  return config;
+}
 
 export const DataProvider = ({ children }) => {
   const [
@@ -18,6 +32,19 @@ export const DataProvider = ({ children }) => {
       const {data:videoItems}=await axios.get("https://camtubetest.herokuapp.com/videos")
           dispatch({type:SET_VIDEOS,payload:videoItems.videos})
       console.log("videos",videoItems?.videoseos)
+    }
+    catch(err)
+    {
+      console.log(err)
+    }
+  }
+
+  const loadUser=async()=>
+  {
+    try{
+      const {data}=await axios.get("https://camtubetest.herokuapp.com/users",tokenConfig)
+      console.log("users data",data)
+      dispatch({type:LOAD_USER,payload:data})
     }
     catch(err)
     {
@@ -64,6 +91,7 @@ export const DataProvider = ({ children }) => {
   return (
     <DataContext.Provider
       value={{
+        loadUser,
         loginUser,
         logOutUser,
         loadVideos,

@@ -16,7 +16,7 @@ import { useData } from "./Context/DataContext";
 import { PrivateRoute} from "./Components/privateRoute/PrivateRoute"
 import {useEffect} from "react"
 function App() {
-  const {loadVideos}=useData();
+  const {loadVideos,loadUser}=useData();
  
 
   useEffect(() => {
@@ -24,6 +24,7 @@ function App() {
     if(isMounted)
     {
       loadVideos()
+      loadUser()
     }
 
     return () => {
@@ -34,8 +35,8 @@ function App() {
     <div className="App">
      <Navbar/>
       <Routes>
-        <Route  path="/" element={<Home />} />
-        <PrivateRoute  path="/:videoID" element={<VideoDetails />} />
+        <Route path="/" element={<Home />} />
+        <Route  path="/:videoID" element={<VideoDetails />} />
         <PrivateRoute path="/saved" element={<SavedVideo />} />
         <PrivateRoute path="/history" element={<History />} />
         <PrivateRoute path="/liked" element={<LikedVideo />} />

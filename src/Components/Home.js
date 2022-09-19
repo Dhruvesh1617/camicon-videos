@@ -35,8 +35,8 @@ export const Home = () => {
                     backgroundColor: "black",
                     color: "white",
                     position: "absolute",
-                    bottom: "50px",
-                    right: "30px"
+                    bottom: "0px",
+                    right: "0px"
                   }}
                 >
                   Time:{videoitem.duration}

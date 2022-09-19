@@ -2,7 +2,7 @@ import { useData } from "../Context/DataContext";
 import { Link } from "react-router-dom";
 export const LikedVideo = () => {
   const { likedvideos } = useData();
-  console.log(likedvideos)
+  console.log("Liked videos",likedvideos)
   return (
     <div className="main-container">
     

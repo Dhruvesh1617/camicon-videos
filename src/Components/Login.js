@@ -18,12 +18,20 @@ const loginReducer=(state,action)=>
 
 function Login() {
     const [{email,password}, dispatch] = useReducer(loginReducer,{email:"",password:""})
-    const {loginUser}=useData();
+    const {loginUser,isAuthenticated,logOutUser}=useData();
     const {state}=useLocation();
+    //console.log("state",state.from)
     const navigate=useNavigate();
     return (
         <>
-            <div className='cred-card credentials-page '>
+            {isAuthenticated?
+            (
+                <div style={{display:"flex",justifyContent:"center"}}>
+                    <button className='btn btn_logout-color' onClick={logOutUser}>Logout</button>
+                </div>
+            
+            )
+            :(<div className='cred-card credentials-page '>
             <h2>Login</h2>
             <input onChange={(e)=>dispatch({type:"EMAIL",payload:e.target.value})} 
              className="credential_elements" type="email" placeholder='email'></input>
@@ -34,8 +42,8 @@ function Login() {
                 e.preventDefault()
                 }}
             className='btn btn_color'>Login</button>
-            Not Registered yet? Register here<Link to="/users/register" className='links'><button className='btn btn_color'>Register here</button></Link>
-        </div>
+            Not Registered yet? Register here<Link to="/register" className='links'><button className='btn btn_color'>Register here</button></Link>
+        </div>)}
         </>
     )
 }
